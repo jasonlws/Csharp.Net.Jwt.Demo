@@ -1,0 +1,6 @@
+@Csharp.Net.Jwt.EcdsaKey.Client_HostAddress = http://localhost:5194
+
+GET {{Csharp.Net.Jwt.EcdsaKey.Client_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

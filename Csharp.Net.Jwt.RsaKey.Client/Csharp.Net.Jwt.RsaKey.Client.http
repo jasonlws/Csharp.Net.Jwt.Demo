@@ -1,0 +1,6 @@
+@Csharp.Net.Jwt.RsaKey.Client_HostAddress = http://localhost:5037
+
+GET {{Csharp.Net.Jwt.RsaKey.Client_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

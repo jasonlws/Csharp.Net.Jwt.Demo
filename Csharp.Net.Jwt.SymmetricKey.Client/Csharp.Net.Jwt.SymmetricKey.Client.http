@@ -1,0 +1,6 @@
+@Csharp.Net.Jwt.SymmetricKey.Client_HostAddress = http://localhost:5001
+
+GET {{Csharp.Net.Jwt.SymmetricKey.Client_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
