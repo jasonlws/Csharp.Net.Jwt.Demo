@@ -32,14 +32,14 @@ namespace Csharp.Net.Jwt.SymmetricKey.Server.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             };
 
-            var creds = new SigningCredentials(_symmetricKey, SecurityAlgorithms.HmacSha256Signature);
+            var creds = new SigningCredentials(_symmetricKey, SecurityAlgorithms.HmacSha256);
 
             var jwt = new JwtSecurityToken(
-                audience: user.AudienceType,
+                audience: _configuration["Audience"],
                 issuer: _configuration["Issuer"],
                 claims: claim,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMilliseconds(int.Parse(_configuration["TokenExpires"])),
                 signingCredentials: creds
             );
 
@@ -47,6 +47,38 @@ namespace Csharp.Net.Jwt.SymmetricKey.Server.Services
 
             return tokenHandler.WriteToken(jwt);
 
+        }
+
+        public string RefreshToken(string token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = false,
+                ValidateIssuerSigningKey = true,
+                ValidIssuers = _configuration["Issuer"].Split(";").ToList(),
+                ValidAudiences = _configuration["Audience"].Split(";").ToList(),
+                IssuerSigningKey = _symmetricKey,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+            if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            var creds = new SigningCredentials(_symmetricKey, SecurityAlgorithms.HmacSha256);
+
+            var jwt = new JwtSecurityToken(
+                issuer: _configuration["Issuer"],
+                claims: principal.Claims.ToList(),
+                notBefore: DateTime.Now,
+                expires: DateTime.Now.AddMinutes(1),
+                signingCredentials: creds
+            );
+
+            return tokenHandler.WriteToken(jwt);
         }
     }
 }

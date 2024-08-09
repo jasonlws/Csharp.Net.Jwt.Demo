@@ -1,10 +1,18 @@
-﻿namespace Csharp.Net.Jwt.SymmetricKey.Server.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Csharp.Net.Jwt.SymmetricKey.Server.DTO
 {
     public class UserDTO
     {
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string AudienceType { get; set; }
+        [Required(ErrorMessage = "Token is required")]
+        public string? Token { get; set; }
+        [Required(ErrorMessage = "Id is required")]
+        public string? Id { get; set; }
+        [Required(ErrorMessage = "User Name is required")]
+        public string? UserName { get; set; }
+        [Required(ErrorMessage = "Email is required")]
+        public string? Email { get; set; }
+        [Required(ErrorMessage = "Phone is required")]
+        public string? Phone { get; set; }
     }
 }

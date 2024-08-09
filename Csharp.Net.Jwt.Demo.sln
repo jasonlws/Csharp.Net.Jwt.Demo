@@ -10,17 +10,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp.Net.Jwt.SymmetricKey.Server", "Csharp.Net.Jwt.SymmetricKey.Server\Csharp.Net.Jwt.SymmetricKey.Server.csproj", "{5CA90A4E-A64C-44D3-B91B-F973F3B07314}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csharp.Net.Jwt.SymmetricKey.Server", "Csharp.Net.Jwt.SymmetricKey.Server\Csharp.Net.Jwt.SymmetricKey.Server.csproj", "{5CA90A4E-A64C-44D3-B91B-F973F3B07314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp.Net.Jwt.SymmetricKey.Client", "Csharp.Net.Jwt.SymmetricKey.Client\Csharp.Net.Jwt.SymmetricKey.Client.csproj", "{889748D5-06D6-460D-AE38-6E75FCD7EE3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csharp.Net.Jwt.SymmetricKey.Client", "Csharp.Net.Jwt.SymmetricKey.Client\Csharp.Net.Jwt.SymmetricKey.Client.csproj", "{889748D5-06D6-460D-AE38-6E75FCD7EE3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp.Net.Jwt.RsaKey.Server", "Csharp.Net.Jwt.RsaKey.Server\Csharp.Net.Jwt.RsaKey.Server.csproj", "{E282C80C-61B3-43BA-8D81-F2E6ECD0481B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csharp.Net.Jwt.RsaKey.Server", "Csharp.Net.Jwt.RsaKey.Server\Csharp.Net.Jwt.RsaKey.Server.csproj", "{E282C80C-61B3-43BA-8D81-F2E6ECD0481B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp.Net.Jwt.RsaKey.Client", "Csharp.Net.Jwt.RsaKey.Client\Csharp.Net.Jwt.RsaKey.Client.csproj", "{D073C3AC-B849-452B-89D4-F077A7050CB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csharp.Net.Jwt.RsaKey.Client", "Csharp.Net.Jwt.RsaKey.Client\Csharp.Net.Jwt.RsaKey.Client.csproj", "{D073C3AC-B849-452B-89D4-F077A7050CB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp.Net.Jwt.EcdsaKey.Server", "Csharp.Net.Jwt.EcdsaKey.Server\Csharp.Net.Jwt.EcdsaKey.Server.csproj", "{B331BAAC-3F9D-487E-8942-6599D2E50E6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csharp.Net.Jwt.EcdsaKey.Server", "Csharp.Net.Jwt.EcdsaKey.Server\Csharp.Net.Jwt.EcdsaKey.Server.csproj", "{B331BAAC-3F9D-487E-8942-6599D2E50E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csharp.Net.Jwt.EcdsaKey.Client", "Csharp.Net.Jwt.EcdsaKey.Client\Csharp.Net.Jwt.EcdsaKey.Client.csproj", "{CF3C3BDA-9766-49DA-9E73-ECFFBD7F05C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csharp.Net.Jwt.EcdsaKey.Client", "Csharp.Net.Jwt.EcdsaKey.Client\Csharp.Net.Jwt.EcdsaKey.Client.csproj", "{CF3C3BDA-9766-49DA-9E73-ECFFBD7F05C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -25,7 +25,10 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SymmetricKeyPath": "./Certs/jwt-symmetric-key.key",
+        "Issuers": "default;jasonlws",
+        "Audiences": "default;admin"
       }
     },
     "Container (Dockerfile)": {

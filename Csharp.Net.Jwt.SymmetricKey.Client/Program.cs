@@ -1,3 +1,4 @@
+using Csharp.Net.Jwt.SymmetricKey.Client.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -44,11 +45,14 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 config["SymmetricKey"] = File.ReadAllText(builder.Configuration["SymmetricKeyPath"]);
+List<string> issuers = Environment.GetEnvironmentVariable("Issuers") == null ? builder.Configuration.GetSection("Issuers").Get<List<string>>() : Environment.GetEnvironmentVariable("Issuers").Split(";").ToList();
+List<string> audiences = Environment.GetEnvironmentVariable("Audiences") == null ? builder.Configuration.GetSection("Audiences").Get<List<string>>() : Environment.GetEnvironmentVariable("Audiences").Split(";").ToList();
 
 builder.Configuration.AddConfiguration(config);
 
-// Adding Authentication
+builder.Services.AddScoped<ITokenService, TokenService>();
 
+// Adding Authentication
 builder.Services.AddAuthentication(
         options =>
         {
@@ -63,8 +67,8 @@ builder.Services.AddAuthentication(
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuers = builder.Configuration.GetSection("jwt:issuers").Get<List<string>>(),
-                ValidAudiences = builder.Configuration.GetSection("jwt:audiences").Get<List<string>>(),
+                ValidIssuers = issuers,
+                ValidAudiences = audiences,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["SymmetricKey"])),
                 ClockSkew = TimeSpan.Zero
             };

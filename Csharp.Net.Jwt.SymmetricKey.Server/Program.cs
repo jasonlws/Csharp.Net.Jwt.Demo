@@ -1,7 +1,7 @@
-// Load appsettings.json
 using Csharp.Net.Jwt.SymmetricKey.Server.Services;
 using Microsoft.OpenApi.Models;
 
+// Load appsettings.json
 IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,10 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
-config["SymmetricKey"] = File.ReadAllText(builder.Configuration["SymmetricKeyPath"]);
+config["SymmetricKey"] = File.ReadAllText(Environment.GetEnvironmentVariable("SymmetricKeyPath"));
+config["Issuer"] = Environment.GetEnvironmentVariable("Issuer") ?? config["Issuer"];
+config["Audience"] = Environment.GetEnvironmentVariable("Audience") ?? config["Audience"];
+config["TokenExpires"] = Environment.GetEnvironmentVariable("TokenExpires") ?? config["TokenExpires"];
 
 builder.Configuration.AddConfiguration(config);
 
