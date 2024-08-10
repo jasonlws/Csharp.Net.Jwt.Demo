@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6400C4D-234D-407F-BFC9-6EF4A3F6F050}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		k8s\csharp-net-jwt-demo.yaml = k8s\csharp-net-jwt-demo.yaml
+		docker-swarm\csharp-net-jwt-demo.yml = docker-swarm\csharp-net-jwt-demo.yml
+		docker-compose\docker-compose.yml = docker-compose\docker-compose.yml
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
