@@ -1,0 +1,250 @@
+services:
+  
+  csharp-net-jwt-sym-server:
+    image: jasonlws/csharp.net.jwt.demo:sym-server
+    ports:
+      - target: 8080
+        published: 55200
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.server==jasonlws-docker-1
+      restart_policy:
+        condition: any
+        delay: 0s
+        max_attempts: 10
+        window: 5s
+      update_config:
+        parallelism: 0
+        delay: 0s
+        failure_action: pause
+        monitor: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        delay: 0s
+        monitor: 5s
+        order: stop-first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - TokenExpires=60000
+      - Issuer=jasonlws
+      - Audience=admin
+      - SymmetricKeyPath=/app/Certs/jwt-symmetric-key.key
+    volumes:
+      - type: bind
+        source: /root/jasonlws-docker-1/Certs/jwt-symmetric-key.key
+        target: /app/Certs/jwt-symmetric-key.key
+        read_only: true
+
+  csharp-net-jwt-sym-client:
+    image: jasonlws/csharp.net.jwt.demo:sym-client
+    ports:
+      - target: 8080
+        published: 55201
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.server==jasonlws-docker-1
+      restart_policy:
+        condition: any
+        delay: 0s
+        max_attempts: 10
+        window: 5s
+      update_config:
+        parallelism: 0
+        delay: 0s
+        failure_action: pause
+        monitor: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        delay: 0s
+        monitor: 5s
+        order: stop-first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Issuers=jasonlws
+      - Audiences=admin
+      - SymmetricKeyPath=/app/Certs/jwt-symmetric-key.key
+    volumes:
+      - type: bind
+        source: /root/jasonlws-docker-1/Certs/jwt-symmetric-key.key
+        target: /app/Certs/jwt-symmetric-key.key
+        read_only: true
+
+  csharp-net-jwt-rsa-server:
+    image: jasonlws/csharp.net.jwt.demo:rsa-server
+    ports:
+      - target: 8080
+        published: 55210
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.server==jasonlws-docker-2
+      restart_policy:
+        condition: any
+        delay: 0s
+        max_attempts: 10
+        window: 5s
+      update_config:
+        parallelism: 0
+        delay: 0s
+        failure_action: pause
+        monitor: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        delay: 0s
+        monitor: 5s
+        order: stop-first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - TokenExpires=60000
+      - Issuer=jasonlws
+      - Audience=admin
+      - RsaKeyPath=/app/Certs/jwt-rsa256-privateKey.pem
+    volumes:
+      - type: bind
+        source: /root/jasonlws-docker-2/Certs/jwt-rsa256-privateKey.pem
+        target: /app/Certs/jwt-rsa256-privateKey.pem
+        read_only: true
+
+  csharp-net-jwt-rsa-client:
+    image: jasonlws/csharp.net.jwt.demo:rsa-client
+    ports:
+      - target: 8080
+        published: 55211
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.server==jasonlws-docker-2
+      restart_policy:
+        condition: any
+        delay: 0s
+        max_attempts: 10
+        window: 5s
+      update_config:
+        parallelism: 0
+        delay: 0s
+        failure_action: pause
+        monitor: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        delay: 0s
+        monitor: 5s
+        order: stop-first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Issuers=jasonlws
+      - Audiences=admin
+      - RsaKeyPath=/app/Certs/jwt-rsa256-publicKey.pem
+    volumes:
+      - type: bind
+        source: /root/jasonlws-docker-2/Certs/jwt-rsa256-publicKey.pem
+        target: /app/Certs/jwt-rsa256-publicKey.pem
+        read_only: true
+
+  csharp-net-jwt-ecdsa-server:
+    image: jasonlws/csharp.net.jwt.demo:ecdsa-server
+    ports:
+      - target: 8080
+        published: 55220
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.server==jasonlws-docker-3
+      restart_policy:
+        condition: any
+        delay: 0s
+        max_attempts: 10
+        window: 5s
+      update_config:
+        parallelism: 0
+        delay: 0s
+        failure_action: pause
+        monitor: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        delay: 0s
+        monitor: 5s
+        order: stop-first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - TokenExpires=60000
+      - Issuer=jasonlws
+      - Audience=admin
+      - EcdsaKeyPath=/app/Certs/jwt-prime256v1-privateKey.pem
+    volumes:
+      - type: bind
+        source: /root/jasonlws-docker-3/Certs/jwt-prime256v1-privateKey.pem
+        target: /app/Certs/jwt-prime256v1-privateKey.pem
+        read_only: true
+
+  csharp-net-jwt-ecdsa-client:
+    image: jasonlws/csharp.net.jwt.demo:ecdsa-client
+    ports:
+      - target: 8080
+        published: 55221
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      placement:
+        constraints:
+          - node.labels.server==jasonlws-docker-3
+      restart_policy:
+        condition: any
+        delay: 0s
+        max_attempts: 10
+        window: 5s
+      update_config:
+        parallelism: 0
+        delay: 0s
+        failure_action: pause
+        monitor: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        delay: 0s
+        monitor: 5s
+        order: stop-first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Issuers=jasonlws
+      - Audiences=admin
+      - EcdsaKeyPath=/app/Certs/jwt-prime256v1-publicKey.pem
+    volumes:
+      - type: bind
+        source: /root/jasonlws-docker-3/Certs/jwt-prime256v1-publicKey.pem
+        target: /app/Certs/jwt-prime256v1-publicKey.pem
+        read_only: true

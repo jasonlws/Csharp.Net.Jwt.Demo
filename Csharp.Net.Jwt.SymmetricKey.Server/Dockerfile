@@ -25,6 +25,3 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 ENTRYPOINT ["dotnet", "Csharp.Net.Jwt.SymmetricKey.Server.dll"]
-
-# docker build -t csharp.net.jwt.demo:sym.server .
-# docker run -d -p 55200:8080 -e ASPNETCORE_ENVIRONMENT=Development -e TokenExpires=60000 -e Issuer=jasonlws -e Audience=admin -e SymmetricKeyPath=/app/Certs/jwt-symmetric-key.key -v %cd%/Certs/jwt-symmetric-key.key:/app/Certs/jwt-symmetric-key.key --name csharp.net.jwt.demo.sym.server csharp.net.jwt.demo:sym.server

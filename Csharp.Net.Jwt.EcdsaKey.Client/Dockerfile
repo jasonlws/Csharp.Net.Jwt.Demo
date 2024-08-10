@@ -25,6 +25,3 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 ENTRYPOINT ["dotnet", "Csharp.Net.Jwt.EcdsaKey.Client.dll"]
-
-# docker build -t csharp.net.jwt.demo:ecdsa.client .
-# docker run -d -p 55221:8080 -e ASPNETCORE_ENVIRONMENT=Development -e Issuers=jasonlws -e Audiences=admin -e EcdsaKeyPath=/app/Certs/jwt-prime256v1-publicKey.pem -v %cd%/Certs/jwt-prime256v1-publicKey.pem:/app/Certs/jwt-prime256v1-publicKey.pem --name csharp.net.jwt.demo.ecdsa.client csharp.net.jwt.demo:ecdsa.client

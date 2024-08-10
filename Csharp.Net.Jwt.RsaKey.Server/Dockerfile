@@ -25,6 +25,3 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 ENTRYPOINT ["dotnet", "Csharp.Net.Jwt.RsaKey.Server.dll"]
-
-# docker build -t csharp.net.jwt.demo:rsa.server .
-# docker run -d -p 55210:8080 -e ASPNETCORE_ENVIRONMENT=Development -e TokenExpires=60000 -e Issuer=jasonlws -e Audience=admin -e RsaKeyPath=/app/Certs/jwt-rsa256-privateKey.pem -v %cd%/Certs/jwt-rsa256-privateKey.pem:/app/Certs/jwt-rsa256-privateKey.pem --name csharp.net.jwt.demo.rsa.server csharp.net.jwt.demo:rsa.server
