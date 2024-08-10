@@ -13,7 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Csharp.Net.Jwt.SymmetricKey.Server", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo {
+      Version = "v1",
+      Title = "Csharp.Net.Jwt.SymmetricKey.Server"
+    });
 });
 
 
