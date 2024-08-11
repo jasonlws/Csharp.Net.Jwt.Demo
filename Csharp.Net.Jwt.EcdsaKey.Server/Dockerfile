@@ -24,4 +24,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+RUN ln -s /ecdsa-private-key.pem /app/ecdsa-private-key.pem
+
 ENTRYPOINT ["dotnet", "Csharp.Net.Jwt.EcdsaKey.Server.dll"]

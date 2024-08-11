@@ -9,11 +9,10 @@ metadata:
   name: sym-server-config
   namespace: jasonlws-csharp-net-jwt-demo
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ShowSwagger: 'true'
   TokenExpires: '60000'
   Issuer: jasonlws
   Audience: admin
-  SymmetricKeyPath: /app/Certs/jwt-symmetric-key.key
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -21,10 +20,9 @@ metadata:
   name: sym-client-config
   namespace: jasonlws-csharp-net-jwt-demo
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ShowSwagger: 'true'
   Issuers: jasonlws
   Audiences: admin
-  SymmetricKeyPath: /app/Certs/jwt-symmetric-key.key
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -32,11 +30,10 @@ metadata:
   name: rsa-server-config
   namespace: jasonlws-csharp-net-jwt-demo
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ShowSwagger: 'true'
   TokenExpires: '60000'
   Issuer: jasonlws
   Audience: admin
-  RsaKeyPath: /app/Certs/jwt-rsa256-privateKey.pem
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -44,10 +41,9 @@ metadata:
   name: rsa-client-config
   namespace: jasonlws-csharp-net-jwt-demo
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ShowSwagger: 'true'
   Issuers: jasonlws
   Audiences: admin
-  RsaKeyPath: /app/Certs/jwt-rsa256-publicKey.pem
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -55,11 +51,10 @@ metadata:
   name: ecdsa-server-config
   namespace: jasonlws-csharp-net-jwt-demo
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ShowSwagger: 'true'
   TokenExpires: '60000'
   Issuer: jasonlws
   Audience: admin
-  EcdsaKeyPath: /app/Certs/jwt-prime256v1-privateKey.pem
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -67,10 +62,9 @@ metadata:
   name: ecdsa-client-config
   namespace: jasonlws-csharp-net-jwt-demo
 data:
-  ASPNETCORE_ENVIRONMENT: Development
+  ShowSwagger: 'true'
   Issuers: jasonlws
   Audiences: admin
-  EcdsaKeyPath: /app/Certs/jwt-prime256v1-publicKey.pem
 ---
 apiVersion: v1
 kind: Secret
@@ -79,7 +73,7 @@ metadata:
   namespace: jasonlws-csharp-net-jwt-demo
 type: Opaque
 data:
-  jwt-symmetric-key.key: OGZhZGM1NWRkYTcyM2FmMGE5ZGJjNDRhZDNmZDFmYWUNCg==
+  symmetric-key.key: OGZhZGM1NWRkYTcyM2FmMGE5ZGJjNDRhZDNmZDFmYWUNCg==
 ---
 apiVersion: v1
 kind: Secret
@@ -88,7 +82,7 @@ metadata:
   namespace: jasonlws-csharp-net-jwt-demo
 type: Opaque
 data:
-  jwt-symmetric-key.key: OGZhZGM1NWRkYTcyM2FmMGE5ZGJjNDRhZDNmZDFmYWUNCg==
+  symmetric-key.key: OGZhZGM1NWRkYTcyM2FmMGE5ZGJjNDRhZDNmZDFmYWUNCg==
 ---
 apiVersion: v1
 kind: Secret
@@ -97,7 +91,7 @@ metadata:
   namespace: jasonlws-csharp-net-jwt-demo
 type: Opaque
 data:
-  jwt-rsa256-privateKey.pem: |
+  rsa-private-key.pem: |
     LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2QUlCQURBTkJna3Foa2lH
     OXcwQkFRRUZBQVNDQktZd2dnU2lBZ0VBQW9JQkFRQ3Y1NjBjTi9VZ2lTQzQKSTFn
     L3dkZW10Mzg2T0pJWDVxSnM1cHNEMWFyZE51QjAxZHdyM25lMEVoUWNDaWZBaHBQ
@@ -142,7 +136,7 @@ metadata:
   namespace: jasonlws-csharp-net-jwt-demo
 type: Opaque
 data:
-  jwt-rsa256-publicKey.pem: |
+  rsa-public-key.pem: |
     LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJB
     UUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFyK2V0SERmMUlJa2d1Q05ZUDhIWApwcmQv
     T2ppU0YrYWliT2FiQTlXcTNUYmdkTlhjSzk1M3RCSVVIQW9ud0lhVDhkL2R1VDJi
@@ -161,7 +155,7 @@ metadata:
   namespace: jasonlws-csharp-net-jwt-demo
 type: Opaque
 data:
-  jwt-prime256v1-privateKey.pem: |
+  ecdsa-private-key.pem: |
     LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSU5YQU1jSU1D
     S1RKaGFqRm1iOWptNVVJS1pyNEZ2ZlJqQjlHb2FlYVJMTFJvQW9HQ0NxR1NNNDkK
     QXdFSG9VUURRZ0FFam8wWVQrV3Y1b1Qvam1hd3BOSnl0TVE2SXFGN2NzdUkrNTFk
@@ -175,7 +169,7 @@ metadata:
   namespace: jasonlws-csharp-net-jwt-demo
 type: Opaque
 data:
-  jwt-prime256v1-publicKey.pem: |
+  ecdsa-public-key.pem: |
     cmVhZCBFQyBrZXkNCndyaXRpbmcgRUMga2V5DQotLS0tLUJFR0lOIFBVQkxJQyBL
     RVktLS0tLQ0KTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFam8w
     WVQrV3Y1b1Qvam1hd3BOSnl0TVE2SXFGNw0KY3N1SSs1MWQ4RlR0NDVFZTNFSHVx
@@ -203,15 +197,15 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: jwt-symmetric-key
-          mountPath: /app/Certs/
+        - name: symmetric-key
+          mountPath: /
           readOnly: true
         env:
-        - name: ASPNETCORE_ENVIRONMENT
+        - name: ShowSwagger
           valueFrom:
             configMapKeyRef:
               name: sym-server-config
-              key: ASPNETCORE_ENVIRONMENT
+              key: ShowSwagger
         - name: TokenExpires
           valueFrom:
             configMapKeyRef:
@@ -227,13 +221,8 @@ spec:
             configMapKeyRef:
               name: sym-server-config
               key: Audience
-        - name: SymmetricKeyPath
-          valueFrom:
-            configMapKeyRef:
-              name: sym-server-config
-              key: SymmetricKeyPath
       volumes:
-      - name: jwt-symmetric-key
+      - name: symmetric-key
         secret:
           secretName: sym-server-secret
 ---
@@ -258,15 +247,15 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: jwt-symmetric-key
-          mountPath: /app/Certs/
+        - name: symmetric-key
+          mountPath: /
           readOnly: true
         env:
-        - name: ASPNETCORE_ENVIRONMENT
+        - name: ShowSwagger
           valueFrom:
             configMapKeyRef:
               name: sym-client-config
-              key: ASPNETCORE_ENVIRONMENT
+              key: ShowSwagger
         - name: Issuers
           valueFrom:
             configMapKeyRef:
@@ -277,13 +266,8 @@ spec:
             configMapKeyRef:
               name: sym-client-config
               key: Audiences
-        - name: SymmetricKeyPath
-          valueFrom:
-            configMapKeyRef:
-              name: sym-client-config
-              key: SymmetricKeyPath
       volumes:
-      - name: jwt-symmetric-key
+      - name: symmetric-key
         secret:
           secretName: sym-client-secret
 ---
@@ -308,15 +292,15 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: rsa-rsa256-private-key
-          mountPath: /app/Certs/
+        - name: rsa-private-key
+          mountPath: /
           readOnly: true
         env:
-        - name: ASPNETCORE_ENVIRONMENT
+        - name: ShowSwagger
           valueFrom:
             configMapKeyRef:
               name: rsa-server-config
-              key: ASPNETCORE_ENVIRONMENT
+              key: ShowSwagger
         - name: TokenExpires
           valueFrom:
             configMapKeyRef:
@@ -332,13 +316,8 @@ spec:
             configMapKeyRef:
               name: rsa-server-config
               key: Audience
-        - name: RsaKeyPath
-          valueFrom:
-            configMapKeyRef:
-              name: rsa-server-config
-              key: RsaKeyPath
       volumes:
-      - name: rsa-rsa256-private-key
+      - name: rsa-private-key
         secret:
           secretName: rsa-server-secret
 ---
@@ -363,15 +342,15 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: jwt-rsa256-public-key
-          mountPath: /app/Certs/
+        - name: rsa-public-key
+          mountPath: /
           readOnly: true
         env:
-        - name: ASPNETCORE_ENVIRONMENT
+        - name: ShowSwagger
           valueFrom:
             configMapKeyRef:
               name: rsa-client-config
-              key: ASPNETCORE_ENVIRONMENT
+              key: ShowSwagger
         - name: Issuers
           valueFrom:
             configMapKeyRef:
@@ -382,13 +361,8 @@ spec:
             configMapKeyRef:
               name: rsa-client-config
               key: Audiences
-        - name: RsaKeyPath
-          valueFrom:
-            configMapKeyRef:
-              name: rsa-client-config
-              key: RsaKeyPath
       volumes:
-      - name: jwt-rsa256-public-key
+      - name: rsa-public-key
         secret:
           secretName: rsa-client-secret
 ---
@@ -413,15 +387,15 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: jwt-prime256v1-private-key
-          mountPath: /app/Certs/
+        - name: ecdsa-private-key
+          mountPath: /
           readOnly: true
         env:
-        - name: ASPNETCORE_ENVIRONMENT
+        - name: ShowSwagger
           valueFrom:
             configMapKeyRef:
               name: ecdsa-server-config
-              key: ASPNETCORE_ENVIRONMENT
+              key: ShowSwagger
         - name: TokenExpires
           valueFrom:
             configMapKeyRef:
@@ -437,13 +411,8 @@ spec:
             configMapKeyRef:
               name: ecdsa-server-config
               key: Audience
-        - name: EcdsaKeyPath
-          valueFrom:
-            configMapKeyRef:
-              name: ecdsa-server-config
-              key: EcdsaKeyPath
       volumes:
-      - name: jwt-prime256v1-private-key
+      - name: ecdsa-private-key
         secret:
           secretName: ecdsa-server-secret
 ---
@@ -468,15 +437,15 @@ spec:
         ports:
         - containerPort: 8080
         volumeMounts:
-        - name: jwt-prime256v1-public-key
-          mountPath: /app/Certs/
+        - name: ecdsa-public-key
+          mountPath: /
           readOnly: true
         env:
-        - name: ASPNETCORE_ENVIRONMENT
+        - name: ShowSwagger
           valueFrom:
             configMapKeyRef:
               name: ecdsa-client-config
-              key: ASPNETCORE_ENVIRONMENT
+              key: ShowSwagger
         - name: Issuers
           valueFrom:
             configMapKeyRef:
@@ -487,13 +456,8 @@ spec:
             configMapKeyRef:
               name: ecdsa-client-config
               key: Audiences
-        - name: EcdsaKeyPath
-          valueFrom:
-            configMapKeyRef:
-              name: ecdsa-client-config
-              key: EcdsaKeyPath
       volumes:
-      - name: jwt-prime256v1-public-key
+      - name: ecdsa-public-key
         secret:
           secretName: ecdsa-client-secret
 ---

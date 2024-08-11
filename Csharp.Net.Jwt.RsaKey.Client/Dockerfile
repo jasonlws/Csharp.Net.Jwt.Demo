@@ -24,4 +24,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+RUN ln -s /rsa-public-key.pem /app/rsa-public-key.pem
+
 ENTRYPOINT ["dotnet", "Csharp.Net.Jwt.RsaKey.Client.dll"]

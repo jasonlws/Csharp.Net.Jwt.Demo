@@ -26,7 +26,6 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "EcdsaKeyPath": "./Certs/jwt-prime256v1-publickey.pem",
         "Issuers": "default;jasonlws",
         "Audiences": "default;admin"
       }

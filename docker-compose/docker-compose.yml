@@ -10,15 +10,14 @@ services:
         protocol: tcp
         mode: ingress
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ShowSwagger=true
       - TokenExpires=60000
       - Issuer=jasonlws
       - Audience=admin
-      - SymmetricKeyPath=/app/Certs/jwt-symmetric-key.key
     volumes:
       - type: bind
         source: ./Certs/jwt-symmetric-key.key
-        target: /app/Certs/jwt-symmetric-key.key
+        target: /symmetric-key.key
         read_only: true
 
   csharp-net-jwt-sym-client:
@@ -30,14 +29,13 @@ services:
         protocol: tcp
         mode: ingress
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ShowSwagger=true
       - Issuers=jasonlws
       - Audiences=admin
-      - SymmetricKeyPath=/app/Certs/jwt-symmetric-key.key
     volumes:
       - type: bind
         source: ./Certs/jwt-symmetric-key.key
-        target: /app/Certs/jwt-symmetric-key.key
+        target: /symmetric-key.key
         read_only: true
 
   csharp-net-jwt-rsa-server:
@@ -49,15 +47,14 @@ services:
         protocol: tcp
         mode: ingress
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ShowSwagger=true
       - TokenExpires=60000
       - Issuer=jasonlws
       - Audience=admin
-      - RsaKeyPath=/app/Certs/jwt-rsa256-privateKey.pem
     volumes:
       - type: bind
         source: ./Certs/jwt-rsa256-privateKey.pem
-        target: /app/Certs/jwt-rsa256-privateKey.pem
+        target: /rsa-private-key.pem
         read_only: true
 
   csharp-net-jwt-rsa-client:
@@ -69,14 +66,13 @@ services:
         protocol: tcp
         mode: ingress
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ShowSwagger=true
       - Issuers=jasonlws
       - Audiences=admin
-      - RsaKeyPath=/app/Certs/jwt-rsa256-publicKey.pem
     volumes:
       - type: bind
         source: ./Certs/jwt-rsa256-publicKey.pem
-        target: /app/Certs/jwt-rsa256-publicKey.pem
+        target: /rsa-public-key.pem
         read_only: true
 
   csharp-net-jwt-ecdsa-server:
@@ -88,15 +84,14 @@ services:
         protocol: tcp
         mode: ingress
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ShowSwagger=true
       - TokenExpires=60000
       - Issuer=jasonlws
       - Audience=admin
-      - EcdsaKeyPath=/app/Certs/jwt-prime256v1-privateKey.pem
     volumes:
       - type: bind
         source: ./Certs/jwt-prime256v1-privateKey.pem
-        target: /app/Certs/jwt-prime256v1-privateKey.pem
+        target: /ecdsa-private-key.pem
         read_only: true
 
   csharp-net-jwt-ecdsa-client:
@@ -108,12 +103,11 @@ services:
         protocol: tcp
         mode: ingress
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ShowSwagger=true
       - Issuers=jasonlws
       - Audiences=admin
-      - EcdsaKeyPath=/app/Certs/jwt-prime256v1-publicKey.pem
     volumes:
       - type: bind
         source: ./Certs/jwt-prime256v1-publicKey.pem
-        target: /app/Certs/jwt-prime256v1-publicKey.pem
+        target: /ecdsa-public-key.pem
         read_only: true

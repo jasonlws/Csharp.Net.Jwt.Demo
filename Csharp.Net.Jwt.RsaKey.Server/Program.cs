@@ -1,25 +1,40 @@
 using Csharp.Net.Jwt.RsaKey.Server.Services;
 using Microsoft.OpenApi.Models;
 
+var builder = WebApplication.CreateBuilder(args);
+
 // Load appsettings.json
 IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-var builder = WebApplication.CreateBuilder(args);
+config["ShowSwagger"] = Environment.GetEnvironmentVariable("ShowSwagger") ?? "false";
+config["RsaKey"] = File.ReadAllText(config["RsaKeyPath"]);
+config["Issuer"] = Environment.GetEnvironmentVariable("Issuer") ?? config["Issuer"];
+config["Audience"] = Environment.GetEnvironmentVariable("Audience") ?? config["Audience"];
+config["TokenExpires"] = Environment.GetEnvironmentVariable("TokenExpires") ?? config["TokenExpires"];
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Csharp.Net.Jwt.RsaKey.Server", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo {
+      Version = "v1",
+      Title = "JWT RSA Server Demo",
+      Description = "<h3>JWT Configuration - Registered claims</h3><b>Issuer</b>: " + config["Issuer"] + "<br /><b>Audience</b>: " + config["Audience"] + "<br /><b>Expiration Time</b>: " + TimeSpan.FromMilliseconds(int.Parse(config["TokenExpires"])).TotalSeconds + " seconds",
+      Contact = new OpenApiContact
+      {
+        Name = "jasonlws",
+        Url = new Uri("https://www.jasonlws.com/")
+      },
+      License = new OpenApiLicense
+      {
+        Name = "MIT License",
+        Url = new Uri("https://raw.githubusercontent.com/jasonlws/Csharp.Net.Jwt.Demo/master/LICENSE")
+      }
+    });
 });
-
-config["RsaKey"] = File.ReadAllText(Environment.GetEnvironmentVariable("RsaKeyPath"));
-config["Issuer"] = Environment.GetEnvironmentVariable("Issuer") ?? config["Issuer"];
-config["Audience"] = Environment.GetEnvironmentVariable("Audience") ?? config["Audience"];
-config["TokenExpires"] = Environment.GetEnvironmentVariable("TokenExpires") ?? config["TokenExpires"];
 
 builder.Configuration.AddConfiguration(config);
 
@@ -28,7 +43,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || config["ShowSwagger"] == "true")
 {
     app.UseSwagger();
     app.UseSwaggerUI();

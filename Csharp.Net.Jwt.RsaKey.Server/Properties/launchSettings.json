@@ -26,7 +26,6 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "RsaKeyPath": "./Certs/jwt-rsa256-privateKey.pem",
         "Issuer": "jasonlws",
         "Audience": "admin",
         "TokenExpires": "60000"

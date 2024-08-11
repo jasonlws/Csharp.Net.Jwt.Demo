@@ -24,4 +24,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+RUN ln -s /jwt-symmetric-key.key /app/jwt-symmetric-key.key
+
 ENTRYPOINT ["dotnet", "Csharp.Net.Jwt.SymmetricKey.Client.dll"]
