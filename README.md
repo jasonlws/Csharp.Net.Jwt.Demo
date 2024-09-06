@@ -1,16 +1,16 @@
 # Csharp.Net.Jwt.Demo
 
-JWT, or JSON Web Token, is a compact and self-contained way for securely transmitting information between parties as a JSON object. It is often used in authentication and information exchange scenarios. Here’s a breakdown of the basic concepts and usage of JWT:
+JWT, or JSON Web Token, is a compact and self-contained way for securely transmitting information between parties as a JSON object. It is often used in authentication and information exchange scenarios. Hereï¿½s a breakdown of the basic concepts and usage of JWT:
 
 ## Key Concepts
 
-==Structure==: A JWT is composed of three parts: Header, Payload, and Signature. These parts are encoded and concatenated with dots (.) as separators.
+Structure: A JWT is composed of three parts: Header, Payload, and Signature. These parts are encoded and concatenated with dots (.) as separators.
 
 ```php
 <Header>.<Payload>.<Signature>
 ```
 
-==Header==: The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
+Header: The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
 
 ```json
 {
@@ -19,7 +19,7 @@ JWT, or JSON Web Token, is a compact and self-contained way for securely transmi
 }
 ```
 
-==Payload==: The payload contains the claims. Claims are statements about an entity (typically, the user) and additional data. There are three types of claims: registered, public, and private.
+Payload: The payload contains the claims. Claims are statements about an entity (typically, the user) and additional data. There are three types of claims: registered, public, and private.
 
 - Registered claims: Predefined claims that are optional but recommended, such as iss (issuer), exp (expiration time), sub (subject), aud (audience), etc.
 - Public claims: Custom claims created to share information, but they need to be defined in the IANA JSON Web Token Registry or be collision-resistant.
@@ -33,7 +33,7 @@ JWT, or JSON Web Token, is a compact and self-contained way for securely transmi
 }
 ```
 
-==Signature==: To create the signature part, you have to take the encoded header, the encoded payload, a secret, and the algorithm specified in the header. The signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
+Signature: To create the signature part, you have to take the encoded header, the encoded payload, a secret, and the algorithm specified in the header. The signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
 
 ```scss
 HMACSHA256(
@@ -125,7 +125,7 @@ ECDSA256: A good choice for systems where computational efficiency and security 
 
 Summary
 
-The choice between HS256, RSA256, and ECDSA256 depends on the specific requirements of your application, including security needs, performance considerations, and key management capabilities. Here’s a quick overview:
+The choice between HS256, RSA256, and ECDSA256 depends on the specific requirements of your application, including security needs, performance considerations, and key management capabilities. Hereï¿½s a quick overview:
 
 | Algorithm	| Type | Key Management | Performance | Security Level | Complexity |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -133,7 +133,7 @@ The choice between HS256, RSA256, and ECDSA256 depends on the specific requireme
 | RSA256 | Asymmetric | Public/Private | Slower | High | Moderate |
 | ECDSA256 | Asymmetric | Public/Private | Moderate | High | Complex |
 
-Choose the algorithm that best matches your application’s requirements for security, performance, and ease of use.
+Choose the algorithm that best matches your applicationï¿½s requirements for security, performance, and ease of use.
 
 ## Conclusion
 

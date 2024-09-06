@@ -1,0 +1,113 @@
+version: '3.9'
+services:
+  
+  csharp-net-jwt-sym-server:
+    image: jasonlws/csharp.net.jwt.demo:sym-server
+    container_name: jwt-sym-server
+    ports:
+      - target: 8080
+        published: 55200
+        protocol: tcp
+        mode: ingress
+    environment:
+      - ShowSwagger=true
+      - TokenExpires=60000
+      - Issuer=jasonlws
+      - Audience=admin
+    volumes:
+      - type: bind
+        source: ./Certs/jwt-symmetric-key.key
+        target: /symmetric-key.key
+        read_only: true
+
+  csharp-net-jwt-sym-client:
+    image: jasonlws/csharp.net.jwt.demo:sym-client
+    container_name: jwt-sym-client
+    ports:
+      - target: 8080
+        published: 55201
+        protocol: tcp
+        mode: ingress
+    environment:
+      - ShowSwagger=true
+      - Issuers=jasonlws
+      - Audiences=admin
+    volumes:
+      - type: bind
+        source: ./Certs/jwt-symmetric-key.key
+        target: /symmetric-key.key
+        read_only: true
+
+  csharp-net-jwt-rsa-server:
+    image: jasonlws/csharp.net.jwt.demo:rsa-server
+    container_name: jwt-rsa-server
+    ports:
+      - target: 8080
+        published: 55210
+        protocol: tcp
+        mode: ingress
+    environment:
+      - ShowSwagger=true
+      - TokenExpires=60000
+      - Issuer=jasonlws
+      - Audience=admin
+    volumes:
+      - type: bind
+        source: ./Certs/jwt-rsa256-privateKey.pem
+        target: /rsa-private-key.pem
+        read_only: true
+
+  csharp-net-jwt-rsa-client:
+    image: jasonlws/csharp.net.jwt.demo:rsa-client
+    container_name: jwt-rsa-client
+    ports:
+      - target: 8080
+        published: 55211
+        protocol: tcp
+        mode: ingress
+    environment:
+      - ShowSwagger=true
+      - Issuers=jasonlws
+      - Audiences=admin
+    volumes:
+      - type: bind
+        source: ./Certs/jwt-rsa256-publicKey.pem
+        target: /rsa-public-key.pem
+        read_only: true
+
+  csharp-net-jwt-ecdsa-server:
+    image: jasonlws/csharp.net.jwt.demo:ecdsa-server
+    container_name: jwt-ecdsa-server
+    ports:
+      - target: 8080
+        published: 55220
+        protocol: tcp
+        mode: ingress
+    environment:
+      - ShowSwagger=true
+      - TokenExpires=60000
+      - Issuer=jasonlws
+      - Audience=admin
+    volumes:
+      - type: bind
+        source: ./Certs/jwt-prime256v1-privateKey.pem
+        target: /ecdsa-private-key.pem
+        read_only: true
+
+  csharp-net-jwt-ecdsa-client:
+    image: jasonlws/csharp.net.jwt.demo:ecdsa-client
+    container_name: jwt-ecdsa-client
+    ports:
+      - target: 8080
+        published: 55221
+        protocol: tcp
+        mode: ingress
+    environment:
+      - ShowSwagger=true
+      - Issuers=jasonlws
+      - Audiences=admin
+    volumes:
+      - type: bind
+        source: ./Certs/jwt-prime256v1-publicKey.pem
+        target: /ecdsa-public-key.pem
+        read_only: true
